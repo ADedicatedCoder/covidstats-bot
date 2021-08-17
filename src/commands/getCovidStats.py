@@ -11,7 +11,7 @@ with open("./data/countryToISO.json") as database:
 
 
 def getCovidStats(country):
-    fetchUrl = "http://localhost:8080/bot"
+    fetchUrl = "https://covidstats-backend-staging.herokuapp.com/bot"
     inputData = {"country": country.upper()}
     postReq = requests.post(fetchUrl, data=inputData)
 
