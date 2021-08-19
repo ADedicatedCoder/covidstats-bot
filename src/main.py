@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 from src.commands.getCovidStats import getCovidStats
 from src.commands.ping import returnPing
 from src.commands.keepEmoji import keepEmojis
+from src.commands.chart import create_chart
+from host import keep_alive
 import time
 
 client = discord.Client()
@@ -37,12 +39,17 @@ async def on_message(message):
         country = (msg.split("!covid ", 1)[1]).upper()
         await chnl.send(embed=getCovidStats(country))
 
-    if message.channel.id == 856287087980576799:
-        await chnl.purge(limit=keepEmojis(msg))
-        await chnl.send("NOT ALLOWED")
-        time.sleep(5)
-        await chnl.purge(limit=1)
+    if msg.startswith("!chart"):
+        country = (msg.split("!chart ", 1)[1]).upper()
+        await chnl.send(embed=create_chart(country))
+
+    if chnl.id == 856287087980576799:
+        if keepEmojis(msg) == True:
+            await chnl.send("***No default emojis or text allowed!***")
+            time.sleep(5)
+            await chnl.purge(limit=2)
 
 
 load_dotenv()
+keep_alive()
 client.run(os.getenv("TOKEN"))
