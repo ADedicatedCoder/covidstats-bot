@@ -1,13 +1,8 @@
 # Import necessary libraries
-from logging import log
 import discord
 import requests
 import json
 import datetime
-from dotenv import load_dotenv
-
-with open("./data/countryToISO.json") as database:
-    countries = json.load(database)
 
 
 def getCovidStats(country):

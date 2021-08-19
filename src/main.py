@@ -4,17 +4,14 @@ import discord
 import os
 import json
 from dotenv import load_dotenv
-from src.commands.getCovidStats import getCovidStats
-from src.commands.ping import returnPing
-from src.commands.keepEmoji import keepEmojis
-from src.commands.chart import create_chart
+from commands.getCovidStats import getCovidStats
+from commands.ping import returnPing
+from commands.keepEmoji import keepEmojis
+from commands.chart import create_chart
 from host import keep_alive
 import time
 
 client = discord.Client()
-
-with open("./data/countryToISO.json") as database:
-    countries = json.load(database)
 
 
 @client.event
