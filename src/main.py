@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 from commands.getCovidStats import getCovidStats
 from commands.ping import returnPing
 from commands.keepEmoji import keepEmojis
-from commands.chart import create_chart
+from commands.barchart import create_bar_chart
+from commands.piechart import create_pie_chart
 from host import keep_alive
 import time
 
@@ -36,9 +37,13 @@ async def on_message(message):
         country = (msg.split("!covid ", 1)[1]).upper()
         await chnl.send(embed=getCovidStats(country))
 
-    if msg.startswith("!chart"):
-        country = (msg.split("!chart ", 1)[1]).upper()
-        await chnl.send(embed=create_chart(country))
+    if msg.startswith("!barchart"):
+        country = (msg.split("!barchart ", 1)[1]).upper()
+        await chnl.send(embed=create_bar_chart(country))
+
+    if msg.startswith("!piechart"):
+        country = (msg.split("!piechart ", 1)[1]).upper()
+        await chnl.send(embed=create_pie_chart(country))
 
     if chnl.id == 856287087980576799:
         if keepEmojis(msg) == True:
